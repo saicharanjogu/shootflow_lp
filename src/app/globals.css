@@ -64,6 +64,14 @@
   --text-price--line-height: 1.1;
   --text-price--letter-spacing: -0.02em;
 
+  /* Secondary body copy — card descriptions, feature lists, footnotes.
+     Runs 15px on a phone and eases down to 14px on desktop: small text is
+     harder to read on a handheld held at arm's length in daylight than on a
+     monitor, so the mobile end of the scale gets the larger value, not the
+     smaller one. */
+  --text-note: clamp(0.875rem, 1rem - 0.3vw, 0.9375rem);
+  --text-note--line-height: 1.5;
+
   --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1.2;
   --text-eyebrow--letter-spacing: 0.14em;
@@ -73,18 +81,22 @@
   --radius-pill: 999px;
 
   /* Shadows stay barely-there: this is an editorial page, not a dashboard. */
-  --shadow-card: 0 1px 2px rgb(26 23 20 / 0.04), 0 8px 24px rgb(26 23 20 / 0.05);
-  --shadow-lift: 0 2px 4px rgb(26 23 20 / 0.05), 0 18px 44px rgb(26 23 20 / 0.09);
-  --shadow-bar: 0 -1px 0 rgb(26 23 20 / 0.07), 0 -12px 28px rgb(26 23 20 / 0.08);
+  --shadow-card:
+    0 1px 2px rgb(26 23 20 / 0.04), 0 8px 24px rgb(26 23 20 / 0.05);
+  --shadow-lift:
+    0 2px 4px rgb(26 23 20 / 0.05), 0 18px 44px rgb(26 23 20 / 0.09);
+  --shadow-bar:
+    0 -1px 0 rgb(26 23 20 / 0.07), 0 -12px 28px rgb(26 23 20 / 0.08);
 }
 
 /* Fonts must be wired with `@theme inline`. With a plain `@theme`, the value
    of var(--font-*) is frozen at definition time and next/font never applies. */
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
-    serif;
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display:
+    var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
 }
 
 @layer base {

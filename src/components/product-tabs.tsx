@@ -81,11 +81,15 @@ export function ProductTabs() {
     const count = PRODUCT.groups.length;
 
     switch (event.key) {
+      // Down/Up are accepted alongside Right/Left because the tabs wrap into a
+      // 2x2 grid on phones, where reaching for a vertical arrow is natural.
       case "ArrowRight":
+      case "ArrowDown":
         event.preventDefault();
         focusTab((active + 1) % count);
         break;
       case "ArrowLeft":
+      case "ArrowUp":
         event.preventDefault();
         focusTab((active - 1 + count) % count);
         break;
@@ -104,46 +108,47 @@ export function ProductTabs() {
 
   return (
     <div>
-      {/* The strip scrolls horizontally on narrow phones and bleeds into the
-          page gutter so it reads as scrollable rather than clipped. The
-          overflow is contained here, never on the page. */}
-      <div className="-mx-5 overflow-x-auto px-5 pb-1 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div
-          role="tablist"
-          aria-label="ShootFlow features"
-          aria-orientation="horizontal"
-          className="flex w-max min-w-full gap-2 rounded-pill border border-line bg-paper p-1.5 sm:w-full"
-        >
-          {PRODUCT.groups.map((group, index) => {
-            const selected = index === active;
-            return (
-              <button
-                key={group.id}
-                ref={(node) => {
-                  tabRefs.current[index] = node;
-                }}
-                type="button"
-                role="tab"
-                id={`tab-${group.id}`}
-                aria-selected={selected}
-                aria-controls={`panel-${group.id}`}
-                // Roving tabindex: one stop for the whole group, arrows move within.
-                tabIndex={selected ? 0 : -1}
-                onClick={() => setActive(index)}
-                onKeyDown={onKeyDown}
-                className={cn(
-                  "inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-pill px-4 text-[0.95rem] font-medium whitespace-nowrap transition-colors",
-                  selected
-                    ? "bg-ink text-cream"
-                    : "text-muted hover:bg-sand hover:text-ink",
-                )}
-              >
-                <TabIcon name={group.icon} />
-                {group.name}
-              </button>
-            );
-          })}
-        </div>
+      {/* On phones the four tabs sit in a 2x2 GRID, not a scrolling row.
+          A horizontal strip needed 501px at a 320px viewport, so "Book" and
+          "Manage" sat entirely off-screen with no scroll affordance — a quarter
+          of the product invisible to anyone who did not think to swipe a
+          control that did not look swipeable. Hick's Law only works when the
+          options are actually on screen. From `sm:` there is room for one row. */}
+      <div
+        role="tablist"
+        aria-label="ShootFlow features"
+        aria-orientation="horizontal"
+        className="grid grid-cols-2 gap-1.5 rounded-card border border-line bg-paper p-1.5 sm:flex sm:gap-2 sm:rounded-pill"
+      >
+        {PRODUCT.groups.map((group, index) => {
+          const selected = index === active;
+          return (
+            <button
+              key={group.id}
+              ref={(node) => {
+                tabRefs.current[index] = node;
+              }}
+              type="button"
+              role="tab"
+              id={`tab-${group.id}`}
+              aria-selected={selected}
+              aria-controls={`panel-${group.id}`}
+              // Roving tabindex: one stop for the whole group, arrows move within.
+              tabIndex={selected ? 0 : -1}
+              onClick={() => setActive(index)}
+              onKeyDown={onKeyDown}
+              className={cn(
+                "inline-flex min-h-12 items-center justify-center gap-2 rounded-pill px-2 text-[0.95rem] font-medium whitespace-nowrap transition-colors sm:flex-1 sm:px-4",
+                selected
+                  ? "bg-ink text-cream"
+                  : "text-muted hover:bg-sand hover:text-ink",
+              )}
+            >
+              <TabIcon name={group.icon} />
+              {group.name}
+            </button>
+          );
+        })}
       </div>
 
       {/* All four panels occupy the SAME grid cell, so the container is always
@@ -164,7 +169,7 @@ export function ProductTabs() {
               // into the content it controls.
               tabIndex={activePanel ? 0 : -1}
               className={cn(
-                "col-start-1 row-start-1 rounded-card border border-line bg-paper p-6 sm:p-8",
+                "col-start-1 row-start-1 rounded-card border border-line bg-paper p-5 sm:p-8",
                 activePanel ? "visible" : "invisible pointer-events-none",
               )}
             >

@@ -26,9 +26,9 @@ export function ValueProp() {
           {VALUE_PROP.heading}
         </SectionHeading>
 
-        <ol className="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2">
+        <ol className="mt-8 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:mt-12 sm:grid-cols-2">
           {VALUE_PROP.steps.map((step) => (
-            <li key={step.number} className="bg-paper p-6 sm:p-7">
+            <li key={step.number} className="bg-paper p-5 sm:p-7">
               <p
                 aria-hidden="true"
                 className="tnum font-display text-2xl text-accent-ink"
@@ -39,7 +39,7 @@ export function ValueProp() {
                 {step.title}
               </h3>
               <p className="mt-2 text-pretty text-muted">{step.body}</p>
-              <p className="mt-2 text-sm text-pretty text-muted">
+              <p className="mt-2 text-note text-pretty text-muted">
                 {step.detail}
               </p>
             </li>

@@ -40,7 +40,7 @@ export function Pricing() {
           {PRICING.heading}
         </SectionHeading>
 
-        <ul className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4 xl:gap-4">
+        <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4 xl:gap-4">
           {PRICING.tiers.map((tier) => {
             const featured = tier.featured;
 
@@ -48,7 +48,7 @@ export function Pricing() {
               <li
                 key={tier.id}
                 className={cn(
-                  "flex flex-col rounded-card bg-paper p-6",
+                  "flex flex-col rounded-card bg-paper p-5 sm:p-6",
                   featured
                     ? "border-2 border-accent shadow-lift xl:-my-2 xl:py-8"
                     : "border border-line",
@@ -60,7 +60,7 @@ export function Pricing() {
                     // A text badge, not just a colour or a size change — the
                     // recommendation has to survive for anyone who cannot see
                     // the accent border.
-                    <span className="rounded-pill bg-accent px-2.5 py-1 text-[0.7rem] font-semibold tracking-wide text-white uppercase">
+                    <span className="rounded-pill bg-accent px-2.5 py-1 text-[0.75rem] font-semibold tracking-wide text-white uppercase">
                       {tier.badge}
                     </span>
                   ) : null}
@@ -76,19 +76,19 @@ export function Pricing() {
                   <span className="text-sm text-muted">{tier.period}</span>
                 </p>
 
-                <p className="mt-3 text-sm text-pretty text-muted">
+                <p className="mt-3 text-note text-pretty text-muted">
                   {tier.audience}
                 </p>
 
                 {tier.inherits ? (
-                  <p className="mt-5 border-t border-line pt-4 text-sm font-medium text-ink">
+                  <p className="mt-5 border-t border-line pt-4 text-note font-medium text-ink">
                     {tier.inherits}
                   </p>
                 ) : null}
 
                 <ul
                   className={cn(
-                    "space-y-2.5 text-sm",
+                    "space-y-2.5 text-note",
                     tier.inherits ? "mt-4" : "mt-5 border-t border-line pt-5",
                   )}
                 >
@@ -135,7 +135,7 @@ export function Pricing() {
           })}
         </ul>
 
-        <div className="mt-8 flex flex-col gap-1 text-sm text-muted">
+        <div className="mt-8 flex flex-col gap-1 text-note text-muted">
           <p>{PRICING.taxNote}</p>
           <p>{CTA_REASSURANCE}</p>
         </div>

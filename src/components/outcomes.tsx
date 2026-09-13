@@ -24,11 +24,11 @@ export function Outcomes() {
         </SectionHeading>
         <p className="mt-5 text-lead text-muted">{OUTCOMES.intro}</p>
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid gap-3 sm:mt-10 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {OUTCOMES.items.map((item) => (
             <li
               key={item.title}
-              className="rounded-card border border-line bg-paper p-6"
+              className="rounded-card border border-line bg-paper p-5 sm:p-6"
             >
               <div className="flex items-start gap-3">
                 <svg
@@ -46,7 +46,7 @@ export function Outcomes() {
                 </svg>
                 <div>
                   <h3 className="font-semibold text-ink">{item.title}</h3>
-                  <p className="mt-1.5 text-sm text-pretty text-muted">
+                  <p className="mt-1.5 text-note text-pretty text-muted">
                     {item.body}
                   </p>
                 </div>

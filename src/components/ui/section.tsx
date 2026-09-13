@@ -39,8 +39,14 @@ export function Section({
     <Tag
       id={id}
       // scroll-mt clears the sticky header when an anchor jumps here.
+      //
+      // Mobile gets a tighter vertical rhythm than desktop. Thirteen sections at
+      // desktop padding put roughly 1,600px of pure whitespace into a phone
+      // scroll — generous spacing that reads as considered on a wide screen
+      // reads as a long walk on a 320px one, where the reader can only ever see
+      // one section at a time anyway.
       className={cn(
-        "scroll-mt-22 py-16 sm:py-20 lg:py-28",
+        "scroll-mt-20 py-12 sm:py-20 lg:py-28",
         TONES[tone],
         className,
       )}
@@ -70,7 +76,11 @@ export function Container({
     <div
       // px-5 is the mobile gutter and never collapses — the page must never
       // let text touch the edge of a phone screen.
-      className={cn("mx-auto w-full px-5 sm:px-6 lg:px-8", widths[width], className)}
+      className={cn(
+        "mx-auto w-full px-5 sm:px-6 lg:px-8",
+        widths[width],
+        className,
+      )}
     >
       {children}
     </div>
@@ -117,10 +127,7 @@ export function SectionHeading({
   return (
     <h2
       id={id ? `${id}-heading` : undefined}
-      className={cn(
-        "font-display text-h2 text-balance",
-        className,
-      )}
+      className={cn("font-display text-h2 text-balance", className)}
     >
       {children}
     </h2>

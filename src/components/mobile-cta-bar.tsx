@@ -44,6 +44,10 @@ export function MobileCtaBar() {
     <div
       className={cn(
         "fixed inset-x-0 bottom-0 z-40 border-t border-line bg-cream/95 shadow-bar backdrop-blur-sm transition-transform duration-300 lg:hidden",
+        // Hidden on short viewports — a phone in landscape is only ~390px tall,
+        // where this bar plus the header would claim over a third of the screen.
+        // The in-page CTAs still carry the action there.
+        "[@media(max-height:500px)]:hidden",
         // env() resolves to 0 unless the layout sets viewportFit: "cover".
         "px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]",
         visible ? "translate-y-0" : "translate-y-full",

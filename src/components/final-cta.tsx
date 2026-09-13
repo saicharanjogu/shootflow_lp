@@ -52,7 +52,7 @@ export function FinalCta() {
 
         <div className="mt-10">
           <CtaButton size="lg" block />
-          <p className="mt-3 text-sm text-muted">{CTA_REASSURANCE}</p>
+          <p className="mt-3 text-note text-muted">{CTA_REASSURANCE}</p>
         </div>
       </Container>
     </section>

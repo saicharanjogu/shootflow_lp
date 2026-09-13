@@ -26,11 +26,11 @@ export function Audience() {
           {AUDIENCE.heading}
         </SectionHeading>
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+        <ul className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4">
           {AUDIENCE.personas.map((persona) => (
             <li
               key={persona.title}
-              className="flex flex-col rounded-card border border-line bg-paper p-6 sm:p-7"
+              className="flex flex-col rounded-card border border-line bg-paper p-5 sm:p-7"
             >
               <h3 className="font-display text-h3 text-ink">{persona.title}</h3>
               <p className="mt-3 text-pretty text-muted">{persona.situation}</p>

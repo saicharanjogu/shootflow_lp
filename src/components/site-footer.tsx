@@ -15,8 +15,10 @@ export function SiteFooter() {
 
   return (
     // The extra bottom padding below `lg` reserves room for the sticky mobile
-    // CTA bar, so the copyright line is never trapped underneath it.
-    <footer className="bg-ink pt-14 pb-28 text-cream sm:pt-16 lg:pb-16">
+    // CTA bar, so the copyright line is never trapped underneath it. The bar
+    // hides itself on short (landscape) viewports, so the reservation lifts
+    // there too rather than leaving dead space.
+    <footer className="bg-ink pt-12 pb-28 text-cream sm:pt-16 lg:pb-16 [@media(max-height:500px)]:pb-16">
       <Container width="wide">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">

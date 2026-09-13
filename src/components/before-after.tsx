@@ -34,9 +34,9 @@ export function BeforeAfter() {
           {BEFORE_AFTER.heading}
         </SectionHeading>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 md:gap-10">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-8 md:grid-cols-2 md:gap-10">
           {/* BEFORE — deliberately unresolved */}
-          <div className="rounded-card border border-white/10 bg-white/[0.03] p-6 sm:p-7">
+          <div className="rounded-card border border-white/10 bg-white/[0.03] p-5 sm:p-7">
             <h3 className="text-eyebrow font-semibold text-ink-muted uppercase">
               {BEFORE_AFTER.before.title}
             </h3>
@@ -64,7 +64,7 @@ export function BeforeAfter() {
           </div>
 
           {/* AFTER — one continuous chain */}
-          <div className="rounded-card border border-accent-light/40 bg-accent-light/[0.07] p-6 sm:p-7">
+          <div className="rounded-card border border-accent-light/40 bg-accent-light/[0.07] p-5 sm:p-7">
             <h3 className="text-eyebrow font-semibold text-accent-light uppercase">
               {BEFORE_AFTER.after.title}
             </h3>

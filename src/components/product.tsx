@@ -17,7 +17,7 @@ export function Product() {
           {PRODUCT.heading}
         </SectionHeading>
 
-        <div className="mt-10">
+        <div className="mt-8 sm:mt-10">
           <ProductTabs />
         </div>
       </Container>

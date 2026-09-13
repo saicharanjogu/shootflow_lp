@@ -25,7 +25,7 @@ export function HowItWorks() {
           {HOW_IT_WORKS.heading}
         </SectionHeading>
 
-        <div className="relative mt-12">
+        <div className="relative mt-8 sm:mt-12">
           {/* Mobile spine: one vertical rule threading the numerals. */}
           <span
             aria-hidden="true"
@@ -61,11 +61,11 @@ export function HowItWorks() {
           </ol>
         </div>
 
-        <ul className="mt-12 flex flex-wrap gap-x-6 gap-y-2">
+        <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 sm:mt-12">
           {HOW_IT_WORKS.footnote.map((line) => (
             <li
               key={line}
-              className="flex items-center gap-2 text-sm font-medium text-ink"
+              className="flex items-center gap-2 text-note font-medium text-ink"
             >
               <svg
                 aria-hidden="true"

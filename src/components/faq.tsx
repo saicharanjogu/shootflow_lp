@@ -30,7 +30,7 @@ export function Faq() {
           {FAQ.heading}
         </SectionHeading>
 
-        <div className="mt-10 space-y-3">
+        <div className="mt-8 space-y-2.5 sm:mt-10 sm:space-y-3">
           {FAQ.items.map((item) => (
             <details
               key={item.question}

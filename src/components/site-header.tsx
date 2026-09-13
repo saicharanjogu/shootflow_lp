@@ -51,7 +51,7 @@ export function SiteHeader() {
       if (event.key !== "Tab" || !panelRef.current) return;
 
       const focusable = panelRef.current.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled])',
+        "a[href], button:not([disabled])",
       );
       if (focusable.length === 0) return;
 
@@ -143,9 +143,7 @@ export function SiteHeader() {
             aria-controls="mobile-menu"
             className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-md text-ink lg:hidden"
           >
-            <span className="sr-only">
-              {open ? "Close menu" : "Open menu"}
-            </span>
+            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"

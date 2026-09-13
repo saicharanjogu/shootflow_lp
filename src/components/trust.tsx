@@ -28,7 +28,10 @@ export function Trust() {
 
         <ul className="mt-8 space-y-3">
           {TRUST.points.map((point) => (
-            <li key={point} className="flex items-start gap-3 text-lead text-ink">
+            <li
+              key={point}
+              className="flex items-start gap-3 text-lead text-ink"
+            >
               <svg
                 aria-hidden="true"
                 viewBox="0 0 20 20"
