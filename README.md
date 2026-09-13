@@ -32,13 +32,21 @@ Copy `.env.example` to `.env.local`. Nothing is required to run locally.
 
 | Variable | Purpose |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | Public origin. Drives `metadataBase`, OG image URLs and the sitemap. Defaults to `http://localhost:3000`. |
+| `NEXT_PUBLIC_SITE_URL` | Public origin. Drives `metadataBase`, canonical and OG URLs, `robots.txt` and the sitemap. |
 | `NEXT_PUBLIC_SIGNUP_URL` | Where every "Start Free Trial" button points. Falls back to the on-page `#signup` anchor. |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Optional. See the commented analytics block in `src/app/layout.tsx`. |
 
-**Going live needs two of these set**: `NEXT_PUBLIC_SITE_URL` (otherwise OG tags
-and the sitemap point at localhost) and `NEXT_PUBLIC_SIGNUP_URL` (otherwise CTAs
-scroll to the bottom of the page instead of starting a trial).
+**`NEXT_PUBLIC_SITE_URL` must be either unset or a full absolute URL** — never
+set to an empty value. When it is unset the origin falls back to
+`NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL`, then `NEXT_PUBLIC_VERCEL_URL` (both
+provided by Vercel), then `http://localhost:3000`, so Vercel deploys resolve to
+their real URL without it being set at all. A bare hostname gets `https://`
+prepended and trailing slashes are stripped, so `shootflow.in/` and
+`https://shootflow.in` are equivalent.
+
+**Going live**: set `NEXT_PUBLIC_SIGNUP_URL`, or CTAs scroll to the bottom of
+the page instead of starting a trial. Set `NEXT_PUBLIC_SITE_URL` too once a
+custom domain is pointed at the project.
 
 ## Where things live
 

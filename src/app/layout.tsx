@@ -5,7 +5,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { buildOrganizationSchema } from "@/lib/schema";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import { SITE_DESCRIPTION, SITE_NAME, siteUrl } from "@/lib/site";
 
 /*
  * Fonts are self-hosted by next/font — no request to a third party at runtime,
@@ -30,8 +30,12 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   // Without metadataBase, OG and Twitter image URLs resolve against
-  // localhost:3000 in the built HTML.
-  metadataBase: new URL(SITE_URL),
+  // localhost:3000 in the built HTML. siteUrl() resolves and validates the
+  // origin rather than constructing a URL inline — `new URL()` here runs at
+  // module evaluation, so a blank or malformed environment variable would fail
+  // the entire build with an error pointing at this line instead of at the
+  // setting responsible.
+  metadataBase: siteUrl(),
   title: {
     default: `${SITE_NAME} — More Enquiries. More Bookings.`,
     template: `%s — ${SITE_NAME}`,
