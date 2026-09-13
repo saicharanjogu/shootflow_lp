@@ -102,8 +102,16 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    /* Clears the sticky header when jumping to an anchor. */
-    scroll-padding-top: 5.5rem;
+    /*
+     * NO scroll-padding-top here on purpose.
+     *
+     * The anchor offset is owned in exactly one place: `scroll-mt-*` on the
+     * section itself (see components/ui/section.tsx). Setting both is not
+     * belt-and-braces — they ADD, and this page was landing anchors 168px
+     * below the viewport top (88px padding + 80px margin) instead of the ~80px
+     * needed to clear the header, leaving a conspicuous gap above every
+     * heading a nav link jumped to.
+     */
   }
 
   /* Smooth scrolling is opt-in only for users who haven't asked for less motion. */

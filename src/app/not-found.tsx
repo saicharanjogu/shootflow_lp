@@ -26,7 +26,7 @@ export default function NotFound() {
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
-                href={`/${link.href}`}
+                href={link.href}
                 className="flex min-h-14 items-center justify-between font-medium text-ink"
               >
                 {link.label}

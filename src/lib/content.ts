@@ -18,11 +18,21 @@
 /* Navigation                                                                 */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Hrefs are ROOT-RELATIVE (`/#product`, not `#product`) because the header that
+ * renders them lives in the root layout and therefore appears on /privacy and
+ * /terms too, where none of these sections exist. A bare fragment is dead on
+ * those pages; `/#product` navigates home and lands on the section.
+ *
+ * On the home page this still scrolls without a reload: the browser compares
+ * the URL minus its fragment against the current document, sees the same page,
+ * and performs a fragment navigation rather than a load.
+ */
 export const NAV_LINKS = [
-  { label: "Product", href: "#product" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQs", href: "#faq" },
+  { label: "Product", href: "/#product", id: "product" },
+  { label: "How It Works", href: "/#how-it-works", id: "how-it-works" },
+  { label: "Pricing", href: "/#pricing", id: "pricing" },
+  { label: "FAQs", href: "/#faq", id: "faq" },
 ] as const;
 
 export const CTA_LABEL = "Start Free Trial";
@@ -469,11 +479,13 @@ export const FOOTER = {
   columns: [
     {
       title: "Explore",
+      // Root-relative for the same reason as NAV_LINKS: the footer is in the
+      // root layout, so these render on /privacy and /terms too.
       links: [
-        { label: "Product", href: "#product" },
-        { label: "How It Works", href: "#how-it-works" },
-        { label: "Pricing", href: "#pricing" },
-        { label: "FAQs", href: "#faq" },
+        { label: "Product", href: "/#product" },
+        { label: "How It Works", href: "/#how-it-works" },
+        { label: "Pricing", href: "/#pricing" },
+        { label: "FAQs", href: "/#faq" },
       ],
     },
     {

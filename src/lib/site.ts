@@ -94,15 +94,18 @@ export function siteUrl(): URL {
 /**
  * Every "Start Free Trial" button on the page resolves to this one value.
  *
- * Until the real signup app exists it falls back to `#signup`, which is a real
- * element id on the final CTA section — so no button ever dead-ends. Swapping
- * in the production URL is a single environment variable.
+ * Until the real signup app exists it falls back to `/#signup`. The `signup`
+ * id is a real element on the home page's final CTA section, and the leading
+ * slash matters: this value is also rendered by the header, which appears on
+ * /privacy and /terms, where a bare `#signup` would be a dead button.
+ * Swapping in the production URL is a single environment variable.
  */
 export const SIGNUP_URL =
-  firstNonBlank(process.env.NEXT_PUBLIC_SIGNUP_URL) ?? "#signup";
+  firstNonBlank(process.env.NEXT_PUBLIC_SIGNUP_URL) ?? "/#signup";
 
 /** True when CTAs still point at the on-page placeholder rather than a real app. */
-export const SIGNUP_IS_PLACEHOLDER = SIGNUP_URL.startsWith("#");
+export const SIGNUP_IS_PLACEHOLDER =
+  SIGNUP_URL.startsWith("#") || SIGNUP_URL.startsWith("/#");
 
 export const SITE_DESCRIPTION =
   "ShootFlow helps wedding photographers capture enquiries from Instagram, WhatsApp and their website, follow up on time, and turn interest into booked weddings.";

@@ -23,7 +23,7 @@ export function FinalCta() {
     <section
       id="signup"
       aria-labelledby="signup-heading"
-      className="scroll-mt-22 border-y border-line bg-wash py-20 sm:py-24 lg:py-28"
+      className="scroll-mt-20 border-y border-line bg-wash py-20 sm:py-24 lg:py-28"
     >
       <Container width="narrow">
         <h2
