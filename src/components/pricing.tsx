@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/section";
 import { CTA_LABEL, CTA_REASSURANCE, PRICING } from "@/lib/content";
 import { SIGNUP_URL } from "@/lib/site";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 /*
  * Pricing.

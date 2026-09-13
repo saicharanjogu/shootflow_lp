@@ -1,6 +1,6 @@
 import { CTA_LABEL } from "@/lib/content";
 import { SIGNUP_URL } from "@/lib/site";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "outline";
 type Size = "md" | "lg";

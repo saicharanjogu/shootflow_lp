@@ -1,5 +1,6 @@
 /* Tailwind v4 is CSS-first: this import MUST be the first at-rule in the file. */
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /* ---------------------------------------------------------------------------
    Design tokens.
@@ -87,6 +88,60 @@
     0 2px 4px rgb(26 23 20 / 0.05), 0 18px 44px rgb(26 23 20 / 0.09);
   --shadow-bar:
     0 -1px 0 rgb(26 23 20 / 0.07), 0 -12px 28px rgb(26 23 20 / 0.08);
+}
+
+/* ---------------------------------------------------------------------------
+   shadcn semantic tokens.
+
+   These map shadcn's component vocabulary onto the palette above, so a
+   component copied from ui.shadcn.com renders in this design without edits.
+   Every value is one of the contrast-verified hexes already defined — this
+   layer renames, it does not introduce new colour.
+
+   ONE DELIBERATE DIVERGENCE, and it matters:
+
+   shadcn's `--accent` means a SUBTLE HOVER SURFACE (a pale grey). This
+   project's `--color-accent` is the terracotta BRAND FILL used by every CTA on
+   the site. Redefining --color-accent to shadcn's meaning would silently turn
+   every button on the page beige.
+
+   The same applies to `--muted`: shadcn means a pale surface, this project
+   means body text.
+
+   RULE FOR PASTED COMPONENTS: swap `bg-accent` and `bg-muted` for
+   `bg-secondary`, and `text-muted-foreground` works as-is. Everything else in
+   the shadcn vocabulary maps cleanly.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-background: #faf7f2; /* cream */
+  --color-foreground: #1a1714; /* ink — 16.7:1 */
+
+  --color-card: #ffffff; /* paper */
+  --color-card-foreground: #1a1714;
+  --color-popover: #faf7f2;
+  --color-popover-foreground: #1a1714;
+
+  --color-primary: #b4562f; /* terracotta fill */
+  --color-primary-foreground: #ffffff; /* 4.9:1 on primary */
+
+  --color-secondary: #f0eae0; /* sand — the hover surface */
+  --color-secondary-foreground: #1a1714;
+
+  /* NOTE: --color-muted is deliberately NOT redefined here. It already exists
+     above as this project's muted TEXT colour (#5a5148) and is used by ~30
+     `text-muted` call sites. shadcn's `muted` is a surface; overriding it would
+     repaint every paragraph on the site pale sand. Only the -foreground alias
+     is added, which happens to be the same value we already use. */
+  --color-muted-foreground: #5a5148; /* 7.3:1 on cream */
+
+  --color-destructive: #9b2c17; /* 7.0:1 on cream, white text 5.9:1 */
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: #e3dacc; /* line */
+  --color-input: #948266; /* edge — 3.5:1, real boundary */
+  --color-ring: #b4562f; /* focus ring uses the brand accent */
+
+  --radius: 14px;
 }
 
 /* Fonts must be wired with `@theme inline`. With a plain `@theme`, the value

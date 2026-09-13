@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { PRODUCT, type ProductIconKey } from "@/lib/content";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 /*
  * Product feature groups, as tabs.

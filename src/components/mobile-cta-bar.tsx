@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { CTA_LABEL } from "@/lib/content";
 import { SIGNUP_URL } from "@/lib/site";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 /*
  * Sticky mobile CTA bar.
