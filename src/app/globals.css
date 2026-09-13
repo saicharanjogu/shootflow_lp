@@ -1,0 +1,164 @@
+/* Tailwind v4 is CSS-first: this import MUST be the first at-rule in the file. */
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens.
+
+   Tailwind v4 only generates utilities from NAMESPACED custom properties
+   (--color-*, --text-*, --font-*, --radius-*, --shadow-*, --breakpoint-*).
+   A bare token like `--terracotta` would produce no utility class at all.
+
+   Every colour is plain sRGB hex on purpose. Tailwind v4's baseline is
+   Safari 16.4+ / Chrome 111+, and older budget Android is a real segment for
+   this audience, so oklch() and color-mix() are avoided here — they degrade
+   badly rather than gracefully.
+
+   Contrast ratios below are computed with a WCAG calculator, not eyeballed.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Surfaces */
+  --color-cream: #faf7f2; /* page base */
+  --color-sand: #f0eae0; /* alternating section bands */
+  --color-paper: #ffffff; /* cards */
+  --color-wash: #f6e9e1; /* tinted accent surface */
+
+  /* Borders */
+  --color-line: #e3dacc; /* decorative hairlines, where a fill already separates */
+  --color-edge: #948266; /* 3.5:1 on cream — boundaries that carry meaning */
+
+  /* Text */
+  --color-ink: #1a1714; /* 16.7:1 on cream */
+  --color-muted: #5a5148; /* 7.3:1 on cream, 6.5:1 on sand */
+
+  /* Accent.
+     `accent` is a FILL colour: white-on-accent is 4.9:1, which passes AA.
+     As *text* on cream it measures 4.56:1 — a pass, but too near the 4.5
+     line to trust across renderers, so accent text uses the darker stops. */
+  --color-accent: #b4562f;
+  --color-accent-ink: #9a4526; /* 6.0:1 on cream */
+  --color-accent-deep: #8f3f22; /* 6.1:1 on sand, 6.1:1 on wash */
+
+  /* On the dark band, accent has to run light instead of dark: #b4562f on ink
+     would be near-invisible. These are the inverted pair. */
+  --color-accent-light: #e8a184; /* 8.4:1 on ink */
+  --color-ink-muted: #a79684; /* 6.2:1 on ink */
+
+  /* Fluid type scale. clamp() carries the whole range from 320px up, so the
+     layout needs no per-breakpoint font sizing. */
+  --text-display: clamp(2.25rem, 1.45rem + 4vw, 4.25rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.03em;
+
+  --text-h2: clamp(1.75rem, 1.25rem + 2.5vw, 2.85rem);
+  --text-h2--line-height: 1.12;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-h3: clamp(1.25rem, 1.05rem + 1vw, 1.6rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.01em;
+
+  --text-lead: clamp(1.05rem, 0.98rem + 0.45vw, 1.3rem);
+  --text-lead--line-height: 1.55;
+
+  --text-price: clamp(1.9rem, 1.6rem + 1.2vw, 2.4rem);
+  --text-price--line-height: 1.1;
+  --text-price--letter-spacing: -0.02em;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+
+  /* Shape */
+  --radius-card: 14px;
+  --radius-pill: 999px;
+
+  /* Shadows stay barely-there: this is an editorial page, not a dashboard. */
+  --shadow-card: 0 1px 2px rgb(26 23 20 / 0.04), 0 8px 24px rgb(26 23 20 / 0.05);
+  --shadow-lift: 0 2px 4px rgb(26 23 20 / 0.05), 0 18px 44px rgb(26 23 20 / 0.09);
+  --shadow-bar: 0 -1px 0 rgb(26 23 20 / 0.07), 0 -12px 28px rgb(26 23 20 / 0.08);
+}
+
+/* Fonts must be wired with `@theme inline`. With a plain `@theme`, the value
+   of var(--font-*) is frozen at definition time and next/font never applies. */
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
+    serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* Clears the sticky header when jumping to an anchor. */
+    scroll-padding-top: 5.5rem;
+  }
+
+  /* Smooth scrolling is opt-in only for users who haven't asked for less motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tailwind v4 defaults border/divide/ring colour to currentColor rather than
+     a grey. Without this, every un-coloured border renders as an ink hairline. */
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* Custom chevron on the FAQ accordions; removes the native disclosure marker
+     in both WebKit and the standards form. */
+  summary {
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::marker {
+    content: "";
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  /* Optical alignment for the numbered step markers. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Respect the OS-level reduced-motion setting everywhere, including any
+   transition added later without thinking about it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
